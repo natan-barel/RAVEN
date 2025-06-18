@@ -53,6 +53,7 @@ Widespread AI adoption is being driven by generative AI models that can generate
 
 <details>
   <summary><b> Latest project updates </b></summary>
+  * 10-Jun-2025 Claude 4 support. Ensure you have RPM/TPM quotas to try out Claude-4
   * 28-May-2025 Multi-Agent Orchestration now through Strands SDK
   * 08-Nov-2024 Supports Claude-3.5 Haiku for RAG/OCR/PII Identification/Sentiment Analysis
   * 29-Oct-2024 Supports Claude-3.5 Sonnet V2/Opus for RAG/OCR/PII Identification/Sentiment Analysis
