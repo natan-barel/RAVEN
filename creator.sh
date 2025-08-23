@@ -71,7 +71,7 @@ sudo npm install -g aws-cdk@2.1016.1
 echo "--- Bootstrapping CDK on account in region $deployment_region ---"
 cdk bootstrap aws://$(aws sts get-caller-identity --query "Account" --output text)/$deployment_region
 
-cd serverless-rag-demo
+cd RAVEN
 echo "--- pip install requirements ---"
 python3 -m pip install -r requirements.txt
 
