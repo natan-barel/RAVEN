@@ -40,7 +40,7 @@ export default function HomePage() {
                   color="text-body-secondary"
                   margin={{ top: "xs", bottom: "l" }}
                 >
-                  A fully managed serverless generative AI solution for various use cases, including Retrieval Augmented Generation, Sentiment Analysis, OCR, and Multi-Agent systems.
+                  A fully managed serverless generative AI solution for Document Chat and OCR capabilities, enabling natural language conversations with documents and text extraction from images.
                 </Box>
               </Box>
             </Container>
@@ -51,27 +51,27 @@ export default function HomePage() {
       <SpaceBetween size="xxl">
         <Box>&nbsp;</Box>
         <Container>
-          <ColumnLayout borders="vertical" columns={5}>
+          <ColumnLayout borders="vertical" columns={2}>
             <div>
               <Box padding="l" variant="h3">Document Chat</Box>
               {/* <Box variant="p">Retrieval Augmented Generation Solution</Box> */}
             </div>
-            <div>
+            {/* <div>
               <Box padding="l" variant="h3">Multi Agent</Box>
-              {/* <Box variant="p">This solution comprises of multiple-generative AI agents working in tandem to solve a user-problem</Box> */}
+              <Box variant="p">This solution comprises of multiple-generative AI agents working in tandem to solve a user-problem</Box>
             </div>
             <div>
               <Box padding="l" variant="h3">Sentiment Analysis</Box>
-              {/* <Box variant="p"></Box> */}
-            </div>
+              <Box variant="p"></Box>
+            </div> */}
             <div>
               <Box padding="l" variant="h3">OCR</Box>
               {/* <Box variant="p"></Box> */}
             </div>
-            <div>
+            {/* <div>
               <Box padding="l" variant="h3">PII Redaction</Box>
-              {/* <Box variant="p"></Box> */}
-            </div>
+              <Box variant="p"></Box>
+            </div> */}
 
             
           </ColumnLayout>
@@ -104,7 +104,7 @@ export default function HomePage() {
     </Container>
 
 
-    <Container
+    {/* <Container
       media={{
         content: (
           <img
@@ -129,11 +129,11 @@ export default function HomePage() {
         You could generate applications such as calculators/games/presentations/web-searches through multiple generative AI agents
         </Box>
       </SpaceBetween>
-    </Container>
+    </Container> */}
 
 
 
-    <Container
+    {/* <Container
       media={{
         content: (
           <img
@@ -157,7 +157,7 @@ export default function HomePage() {
           Analyze sentiments of a customer review/tweet/Facebook post through foundation models. The model detects the emotion expressed in the review, rates the review on a scale of 1-10.
         </Box>
       </SpaceBetween>
-    </Container>
+    </Container> */}
 
 
 
@@ -187,7 +187,7 @@ export default function HomePage() {
       </SpaceBetween>
     </Container>
 
-    <Container
+    {/* <Container
       media={{
         content: (
           <img
@@ -211,7 +211,7 @@ export default function HomePage() {
           Identify and Redact PII(Personally Identifiable Information) through foundation models.
         </Box>
       </SpaceBetween>
-    </Container>
+    </Container> */}
 
 
       </SpaceBetween>
