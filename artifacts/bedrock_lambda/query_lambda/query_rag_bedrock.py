@@ -11,14 +11,13 @@ from decimal import Decimal
 import re
 import base64
 
-# from agents.retriever_agent import fetch_data_v2, classify_and_translation_request
+from agents.retriever_agent import fetch_data_v2, classify_and_translation_request
 from prompt_utils import rag_chat_bot_prompt
 from prompt_utils import casual_prompt
-# from prompt_utils import sentiment_prompt, generate_claude_3_ocr_prompt
-from prompt_utils import generate_claude_3_ocr_prompt
-# from prompt_utils import pii_redact_prompt
+from prompt_utils import sentiment_prompt, generate_claude_3_ocr_prompt
+from prompt_utils import pii_redact_prompt
 from pypdf import PdfReader
-# from strands_multi_agent.orchestrator import orchestrator
+from strands_multi_agent.orchestrator import orchestrator
 
 bedrock_client = boto3.client('bedrock-runtime')
 embed_model_id = getenv("EMBED_MODEL_ID", "amazon.titan-embed-image-v1")
@@ -41,30 +40,30 @@ region = getenv("REGION", "us-east-1")
 awsauth = AWS4Auth(credentials.access_key, credentials.secret_key,
                    region, service, session_token=credentials.token)
 
-# Agent code start (commented out for Document Chat and OCR only)
-# list_of_tools_specs = []
-# tool_names = []
-# tool_descriptions = []
+# Agent code start
+list_of_tools_specs = []
+tool_names = []
+tool_descriptions = []
 
-# def pii_redact(user_input, model_id, connect_id):
-#     prompt_template = {
-#                         "anthropic_version": "bedrock-2023-05-31",
-#                         "max_tokens": 10000,
-#                         "system": pii_redact_prompt,
-#                         "messages": json.loads(user_input)
-#     }
-#     LOG.debug(f'Sentiment prompt_template {prompt_template}')
-#     invoke_model(0, prompt_template, connect_id, True, model_id)
+def pii_redact(user_input, model_id, connect_id):
+    prompt_template = {
+                        "anthropic_version": "bedrock-2023-05-31",
+                        "max_tokens": 10000,
+                        "system": pii_redact_prompt,
+                        "messages": json.loads(user_input)
+    }
+    LOG.debug(f'Sentiment prompt_template {prompt_template}')
+    invoke_model(0, prompt_template, connect_id, True, model_id)
 
-# def query_sentiment(user_input, model_id, connect_id):
-#     prompt_template = {
-#                         "anthropic_version": "bedrock-2023-05-31",
-#                         "max_tokens": 10000,
-#                         "system": sentiment_prompt,
-#                         "messages": json.loads(user_input)
-#     }
-#     LOG.debug(f'Sentiment prompt_template {prompt_template}')
-#     invoke_model(0, prompt_template, connect_id, True, model_id)
+def query_sentiment(user_input, model_id, connect_id):
+    prompt_template = {
+                        "anthropic_version": "bedrock-2023-05-31",
+                        "max_tokens": 10000,
+                        "system": sentiment_prompt,
+                        "messages": json.loads(user_input)
+    }
+    LOG.debug(f'Sentiment prompt_template {prompt_template}')
+    invoke_model(0, prompt_template, connect_id, True, model_id)
     
 
 def perform_ocr(user_input, model_id, connect_id):
