@@ -10,9 +10,9 @@ phases:
       - echo Printing variables  $langchainpy_layer_name $addtional_libs_layer_name $strands_layer_name $agentic_tools_layer_name $account_id $region $infra_env
   build:
     commands:
-      - git clone https://github.com/aws-samples/serverless-rag-demo.git
+      - git clone https://github.com/natan-barel/RAVEN.git
       - ls
-      - cd serverless-rag-demo
+      - cd RAVEN
       - echo Build aws4auth xmldict Boto3 Opensearchpy lambda layer
       - mkdir python
       - python3 -m pip install requests-aws4auth xmltodict opensearch-py --platform manylinux2014_aarch64 --only-binary=':all:' -t python/

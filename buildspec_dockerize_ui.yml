@@ -15,11 +15,11 @@ phases:
   build:
     commands:
       - echo Install JQ
-      - sudo apt-get update
-      - sudo apt-get install jq
-      - git clone https://github.com/aws-samples/serverless-rag-demo.git
+      - sudo apt-get update -y
+      - sudo apt-get install jq -y
+      - git clone https://github.com/natan-barel/RAVEN.git
       - ls
-      - cd serverless-rag-demo
+      - cd RAVEN
       - jq -n --arg region "$region" --arg user_pool_id "$user_pool_id" --arg client_id "$client_id" --arg rest_endpoint_url $rest_endpoint_url --arg streaming_url "$streaming_url" '{ region:$region, userPoolId:$user_pool_id, clientId:$client_id, apiUrl:$rest_endpoint_url, websocketUrl:$streaming_url }' > artifacts/chat-ui/src/config.json
       - echo Build started on `date`
       - echo Building the Docker image ...
