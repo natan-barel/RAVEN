@@ -210,8 +210,8 @@ class ApiGw_Stack(Stack):
                                             'MULTI_AGENT_MODEL': inference_profile_id
                               },
                               memory_size=3000,
-                            layers= [addtional_libs_layer, agentic_libs_layer_name, agentic_tools_layer_name, pdfpy_layer]
-                            #   layers= [addtional_libs_layer, langchainpy_layer, pdfpy_layer]
+                            # layers= [addtional_libs_layer, agentic_libs_layer_name, agentic_tools_layer_name, pdfpy_layer]
+                            layers= [addtional_libs_layer, langchainpy_layer, pdfpy_layer]
                             )
         
         websocket_api = _cdk.aws_apigatewayv2.CfnApi(self, f'bedrock-streaming-response-{env_name}',

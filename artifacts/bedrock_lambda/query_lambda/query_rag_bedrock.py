@@ -14,10 +14,10 @@ import base64
 from agents.retriever_agent import fetch_data_v2, classify_and_translation_request
 from prompt_utils import rag_chat_bot_prompt
 from prompt_utils import casual_prompt
-from prompt_utils import sentiment_prompt, generate_claude_3_ocr_prompt
-from prompt_utils import pii_redact_prompt
+from prompt_utils import generate_claude_3_ocr_prompt
+# from prompt_utils import sentiment_prompt, pii_redact_prompt  # Not needed for Document Chat and OCR
 from pypdf import PdfReader
-from strands_multi_agent.orchestrator import orchestrator
+# from strands_multi_agent.orchestrator import orchestrator
 
 bedrock_client = boto3.client('bedrock-runtime')
 embed_model_id = getenv("EMBED_MODEL_ID", "amazon.titan-embed-image-v1")
@@ -45,25 +45,25 @@ list_of_tools_specs = []
 tool_names = []
 tool_descriptions = []
 
-def pii_redact(user_input, model_id, connect_id):
-    prompt_template = {
-                        "anthropic_version": "bedrock-2023-05-31",
-                        "max_tokens": 10000,
-                        "system": pii_redact_prompt,
-                        "messages": json.loads(user_input)
-    }
-    LOG.debug(f'Sentiment prompt_template {prompt_template}')
-    invoke_model(0, prompt_template, connect_id, True, model_id)
+# def pii_redact(user_input, model_id, connect_id):
+#     prompt_template = {
+#                         "anthropic_version": "bedrock-2023-05-31",
+#                         "max_tokens": 10000,
+#                         "system": pii_redact_prompt,
+#                         "messages": json.loads(user_input)
+#     }
+#     LOG.debug(f'Sentiment prompt_template {prompt_template}')
+#     invoke_model(0, prompt_template, connect_id, True, model_id)
 
-def query_sentiment(user_input, model_id, connect_id):
-    prompt_template = {
-                        "anthropic_version": "bedrock-2023-05-31",
-                        "max_tokens": 10000,
-                        "system": sentiment_prompt,
-                        "messages": json.loads(user_input)
-    }
-    LOG.debug(f'Sentiment prompt_template {prompt_template}')
-    invoke_model(0, prompt_template, connect_id, True, model_id)
+# def query_sentiment(user_input, model_id, connect_id):
+#     prompt_template = {
+#                         "anthropic_version": "bedrock-2023-05-31",
+#                         "max_tokens": 10000,
+#                         "system": sentiment_prompt,
+#                         "messages": json.loads(user_input)
+#     }
+#     LOG.debug(f'Sentiment prompt_template {prompt_template}')
+#     invoke_model(0, prompt_template, connect_id, True, model_id)
     
 
 def perform_ocr(user_input, model_id, connect_id):
@@ -182,7 +182,8 @@ def query_rag_no_agent(user_input, query_vector_db, language, model_id, is_hybri
                     
 
 def query_agents(agent_type, user_input, connect_id):
-    orchestrator(user_input, connect_id, websocket_client)
+    # orchestrator(user_input, connect_id, websocket_client)  # Commented out - not needed for Document Chat and OCR
+    websocket_send(connect_id, {"text": "Advanced agent functionality is not available in this version. Please use Document Chat or OCR features."})
     # return success_response(connect_id, "success")
 
 
@@ -332,15 +333,15 @@ def handler(event, context):
                 behaviour = input_to_llm['behaviour']
                 if behaviour == 'advanced-agent':
                     query_agents(behaviour, query, connect_id)
-                elif behaviour == 'sentiment':
-                    model_id = input_to_llm['model_id']
-                    query_sentiment(query, model_id, connect_id)
+                # elif behaviour == 'sentiment':
+                #     model_id = input_to_llm['model_id']
+                #     query_sentiment(query, model_id, connect_id)
                 elif behaviour == 'ocr':
                     model_id = input_to_llm['model_id']
                     perform_ocr(query, model_id, connect_id)
-                elif behaviour == 'pii':
-                    model_id = input_to_llm['model_id']
-                    pii_redact(query, model_id, connect_id)
+                # elif behaviour == 'pii':
+                #     model_id = input_to_llm['model_id']
+                #     pii_redact(query, model_id, connect_id)
                 else:
                     query_vector_db = 'no'
                     if 'query_vectordb' in input_to_llm and input_to_llm['query_vectordb']=='yes':
