@@ -172,7 +172,7 @@ def query_rag_no_agent(user_input, query_vector_db, language, model_id, is_hybri
     if can_invoke_model:
         prompt_template = {
                         "anthropic_version": "bedrock-2023-05-31",
-                        "max_tokens": 70000,
+                        "max_tokens": 60000,
                         "system": final_prompt + f'. You will always respond in {language} language',
                         "messages": chat_input
         }

@@ -59,7 +59,7 @@ export default function App() {
           {
             type: "button",
             text: "Github",
-            href: "https://github.com/aws-samples/serverless-rag-demo",
+            href: "https://github.com/natan-barel/RAVEN",
             external: true,
             externalIconAriaLabel: " (opens in a new tab)"
           },
