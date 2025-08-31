@@ -69,7 +69,7 @@ def generate_claude_3_ocr_prompt(image_bytes_list):
         "content": img_content_list
     }]
     prompt_template= {"anthropic_version": "bedrock-2023-05-31",
-                        "max_tokens": 100000,
+                        "max_tokens": 60000,
                         "messages": ocr_prompt
                     }
     return prompt_template 
