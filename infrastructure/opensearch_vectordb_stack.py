@@ -16,7 +16,10 @@ class OpensearchVectorDbStack(NestedStack):
     def __init__(self, scope: Construct, construct_id: str, **kwargs) -> None:
         super().__init__(scope, construct_id, **kwargs)
         Aspects.of(self).add(_cdk_nag.AwsSolutionsChecks())
-        env_name = self.node.try_get_context('environment_name')
+        env_name = self.node.try_get_context('environment_name') or "dev"
+        if not isinstance(env_name, str) or not env_name:
+            raise ValueError("Missing context key 'env'. Pass -c env=<name> when running cdk deploy.")
+        
         env_params = self.node.try_get_context(env_name)
         account_id = os.getenv("CDK_DEFAULT_ACCOUNT")
         region=os.getenv('CDK_DEFAULT_REGION')

@@ -22,7 +22,10 @@ class ApiGw_Stack(Stack):
     def __init__(self, scope: Construct, construct_id: str, **kwargs) -> None:
         super().__init__(scope, construct_id, **kwargs)
         self.stack_level_suppressions()
-        env_name = self.node.try_get_context("environment_name")
+        env_name = self.node.try_get_context("environment_name") or "dev"
+        if not isinstance(env_name, str) or not env_name:
+            raise ValueError("Missing context key 'env'. Pass -c env=<name> when running cdk deploy.")
+        
         env_params = self.node.try_get_context(env_name)
         current_timestamp = self.node.try_get_context('current_timestamp')
         region=os.getenv('CDK_DEFAULT_REGION')

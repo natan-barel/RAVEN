@@ -12,7 +12,10 @@ class Storage_Stack(NestedStack):
 
     def __init__(self, scope: Construct, construct_id: str, **kwargs) -> None:
         super().__init__(scope, construct_id, **kwargs)
-        env_name = self.node.try_get_context("environment_name")
+        env_name = self.node.try_get_context("environment_name") or "dev"
+        if not isinstance(env_name, str) or not env_name:
+            raise ValueError("Missing context key 'env'. Pass -c env=<name> when running cdk deploy.")
+        
         region=os.getenv('CDK_DEFAULT_REGION')
         account_id = os.getenv('CDK_DEFAULT_ACCOUNT')
         self.indx_dynamodb = dynamodb.Table(self,

@@ -19,7 +19,10 @@ class ECRUIStack(NestedStack):
     def __init__(self, scope: Construct, construct_id: str, pool_id: str, client_id: str, rest_endpoint_url, streaming_url, **kwargs) -> None:
         super().__init__(scope, construct_id, **kwargs)
         # Aspects.of(self).add(_cdk_nag.AwsSolutionsChecks())
-        env_name = self.node.try_get_context('environment_name')
+        env_name = self.node.try_get_context('environment_name') or "dev"
+        if not isinstance(env_name, str) or not env_name:
+            raise ValueError("Missing context key 'env'. Pass -c env=<name> when running cdk deploy.")
+        
         config_details = self.node.try_get_context(env_name)
         
         ecr_repo_name = config_details['ecr_repository_name']

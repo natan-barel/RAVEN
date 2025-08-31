@@ -15,7 +15,10 @@ class LlmsWithServerlessRagStack(Stack):
 
     def __init__(self, scope: Construct, construct_id: str, **kwargs) -> None:
         super().__init__(scope, construct_id, **kwargs)
-        env_name = self.node.try_get_context("environment_name")
+        env_name = self.node.try_get_context("environment_name") or "dev"
+        if not isinstance(env_name, str) or not env_name:
+            raise ValueError("Missing context key 'env'. Pass -c env=<name> when running cdk deploy.")
+        
         is_opensearch = self.node.try_get_context("is_aoss")
         bedrock_stack = BedrockLayerStack(self, f'bedrock_rag_container_{env_name}')
         stack_deployed = bedrock_stack

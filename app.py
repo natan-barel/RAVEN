@@ -19,7 +19,6 @@ region = os.getenv('CDK_DEFAULT_REGION')
 env=cdk.Environment(account=account_id, region=region)
 
 env_name = app.node.try_get_context("environment_name") or "dev"
-
 if not isinstance(env_name, str) or not env_name:
     raise ValueError("Missing context key 'env'. Pass -c env=<name> when running cdk deploy.")
 
