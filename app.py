@@ -20,7 +20,7 @@ env=cdk.Environment(account=account_id, region=region)
 
 env_name = app.node.try_get_context("environment_name") or "dev"
 if not isinstance(env_name, str) or not env_name:
-    raise ValueError("Missing context key 'env'. Pass -c env=<name> when running cdk deploy.")
+    raise ValueError("Missing context key 'environment_name'. Pass -c environment_name=<name> when running cdk deploy.")
 
 LlmsWithServerlessRagStack(app, f"LlmsWithServerlessRag{env_name}Stack", env=env
     # If you don't specify 'env', this stack will be environment-agnostic.

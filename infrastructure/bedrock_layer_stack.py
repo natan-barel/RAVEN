@@ -20,7 +20,7 @@ class BedrockLayerStack(NestedStack):
         # Aspects.of(self).add(_cdk_nag.AwsSolutionsChecks())
         env_name = self.node.try_get_context('environment_name') or "dev"
         if not isinstance(env_name, str) or not env_name:
-            raise ValueError("Missing context key 'env'. Pass -c env=<name> when running cdk deploy.")
+            raise ValueError("Missing context key 'environment_name'. Pass -c environment_name=<name> when running cdk deploy.")
 
         config_details = self.node.try_get_context(env_name)
         langchainpy_layer_name = config_details['langchainpy_layer_name']

@@ -14,7 +14,7 @@ class Storage_Stack(NestedStack):
         super().__init__(scope, construct_id, **kwargs)
         env_name = self.node.try_get_context("environment_name") or "dev"
         if not isinstance(env_name, str) or not env_name:
-            raise ValueError("Missing context key 'env'. Pass -c env=<name> when running cdk deploy.")
+            raise ValueError("Missing context key 'environment_name'. Pass -c environment_name=<name> when running cdk deploy.")
         
         region=os.getenv('CDK_DEFAULT_REGION')
         account_id = os.getenv('CDK_DEFAULT_ACCOUNT')
