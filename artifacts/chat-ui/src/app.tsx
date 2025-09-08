@@ -56,13 +56,13 @@ export default function App() {
         }}
 
         utilities={[
-          {
-            type: "button",
-            text: "Github",
-            href: "https://github.com/natan-barel/RAVEN",
-            external: true,
-            externalIconAriaLabel: " (opens in a new tab)"
-          },
+          // {
+          //   type: "button",
+          //   text: "Github",
+          //   href: "https://github.com/natan-barel/RAVEN",
+          //   external: true,
+          //   externalIconAriaLabel: " (opens in a new tab)"
+          // },
           ...utility
         ]}
       /></div>
